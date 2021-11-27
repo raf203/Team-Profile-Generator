@@ -55,12 +55,13 @@ const membersArray = [];
 function repeat(role, extraInfo) {
     inquirer.prompt(questions)
         .then(({ id, employeeName, email, confirmMembers }) => {
-            let member = {
-                id,
-                employeeName,
-                email,
-                role,
-                extraInfo
+            let member;
+            if (role === 'manager') {
+                member = new Manager(employeeName, id, email, extraInfo)
+            } else if (role === 'Engineer') {
+                member = new Engineer(employeeName, id, email, extraInfo)
+            } else if (role === 'Intern') {
+                member = new Intern(employeeName, id, email, extraInfo)
             };
             membersArray.push(member);
             console.log(membersArray);
